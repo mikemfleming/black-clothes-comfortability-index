@@ -4,29 +4,34 @@ const https = require('https');
 
 const { DARK_SKY_API_KEY } = process.env;
 
-module.exports.main = async ({ queryStringParameters: { lat, lng } }) => new Promise((resolve, reject) => {
-  const request = https.get(
-    `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng}`,
-    (res) => {
-      if (res.statusCode < 200 || res.statusCode >= 300) {
-        return resolve(new Error(`Status Code: ${res.statusCode}`));
-      }
+async function getWeather({ queryStringParameters: { lat, lng } }) {
+  try {
+    const { currently } = await get(
+      `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng}`
+    );
 
-      const data = [];
+    return respond(currently, 200);
+  } catch (e) {
+    return respond(e.message, 500);
+  }
+}
 
-      res.on('data', chunk => data.push(chunk));
+function get (url) {
+  return new Promise((resolve, reject) => {
+    let data = '';
 
-      res.on('end', () => {
-        const { currently } = JSON.parse(Buffer.concat(data).toString());
-        resolve({
-          body: currently,
-          statusCode: 200
-        });
-      });
-    }
-  );
+    https.get(url, (response) => {
+      response.on('data', chunk => data += chunk);
+      response.on('end', () => resolve(JSON.parse(data)));
+    }).on('error', e => reject(e));
+  });
+}
 
-  request.on('error', resolve);
+function respond (data, statusCode) {
+  return {
+    statusCode,
+    body: JSON.stringify(data)
+  };
+}
 
-  request.end();
-})
+exports.main = getWeather;

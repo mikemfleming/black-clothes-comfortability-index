@@ -1,0 +1,24 @@
+{
+  "name": "black-clothes-comfortability-index",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "dependencies": {
+    "serverless-offline": "^5.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikemfleming/black-clothes-comfortability-index.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikemfleming/black-clothes-comfortability-index/issues"
+  },
+  "homepage": "https://github.com/mikemfleming/black-clothes-comfortability-index#readme",
+  "description": ""
+}
