@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Black Clothes Comfortability Index</title>
+  <meta name="description" content="Black Clothes Comfortability Index">
+  <meta name="author" content="Darkest Before Dawn">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <style>
+    body {
+      color: white;
+      background-color: black;
+      margin: 0;
+    }
+
+    header {
+      margin-top: 5rem;
+    }
+
+    pre {
+      padding: 5px;
+      border: 1px solid white;
+      min-height: 315px;
+    }
+
+    .message {
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    #index {
+      border-bottom: 2px solid white;
+      min-width: 28px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="center">The Black Clothes Comfortability Index</h1>
+  </header>
+
+  <section class="message">
+    <article>
+      <h2 id="index-title" class="loading">
+        The index for today is <span id="index"></span>
+      </h2>
+    </article>
+    <hr>
+    <article>
+      <p>
+          Below is the response data from the Dark Sky API.
+          I'm thinking that the index is a function of the
+          UV index and the temperature but, as you can see,
+          there is a lot of other data we could base it on.
+      </p>
+      <pre id="dark-sky-response"></pre>
+    </article>
+  </section>
+  
+  <script src="/index.js"></script>
+</body>
+</html>
