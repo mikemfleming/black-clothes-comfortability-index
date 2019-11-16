@@ -7,7 +7,7 @@ const { DARK_SKY_API_KEY } = process.env;
 
 async function getWeather({ queryStringParameters: { lat, lng } }) {
   try {
-    const { currently: currentConditions } = await get(
+    const { currently: currentConditions } = await request(
       `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${lat},${lng}`
     );
 
@@ -20,13 +20,23 @@ async function getWeather({ queryStringParameters: { lat, lng } }) {
 }
 
 function calculateIndex ({ temperature, uvIndex }) {
-  if ((uvIndex * 10 + temperature) > 90) {
-    return 'soul crushing.';
-  }
-  return 'killer.';
+  let score = getUvIndex(uvIndex) + getTempIndex(temperature);
+  
+  return {
+    score,
+    rating: score > 13 ? 'soul crushing.' : 'excellent.'
+  };
 }
 
-function get (url) {
+function getUvIndex(uv) {
+  return uv;
+}
+
+function getTempIndex(t) {
+  return t / 10;
+}
+
+function request (url) {
   return new Promise((resolve, reject) => {
       if (testing) {
         resolve({
