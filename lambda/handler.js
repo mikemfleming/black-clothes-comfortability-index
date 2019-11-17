@@ -3,7 +3,7 @@
 const https = require('https');
 
 const mockResponse = require('./mock-response.json')
-const testing = true;
+const testing = false;
 const { DARK_SKY_API_KEY } = process.env;
 
 async function getWeather({ queryStringParameters: { lat, lng } }) {
@@ -25,7 +25,7 @@ function calculateIndex ({ temperature, uvIndex }) {
   
   return {
     score,
-    rating: score > 13 ? 'soul crushing.' : 'excellent.'
+    rating: score > 13 ? 'soul crushing' : 'excellent'
   };
 }
 

@@ -14,30 +14,44 @@
       color: white;
       background-color: black;
       margin: 0;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     header {
       margin-top: 5rem;
     }
 
-    pre {
-      padding: 5px;
-      border: 1px solid white;
-      min-height: 315px;
+    a {
+      color: red;
     }
 
-    .message {
+    p {
+      margin: 0;
+    }
+
+    #message {
       margin: 0 auto;
-      max-width: 600px;
+      width: 80%;
+      padding-top: 2rem;
     }
 
     .center {
       text-align: center;
     }
 
-    #index {
+    #rating {
       border-bottom: 2px solid white;
       min-width: 28px;
+      color: red;
+    }
+
+    #rating-container {
+      margin-bottom: 6rem;
+    }
+
+    #links {
+      display: flex;
+      justify-content: space-around;
     }
   </style>
 </head>
@@ -47,52 +61,58 @@
     <h1 class="center">The Black Clothing Comfortability Index</h1>
   </header>
 
-  <section class="message">
-    <article>
-      <h2 id="index-title" class="loading">
-        The index for today is <span id="index"></span>
+  <section id="message">
+
+    <article id="rating-container">
+      <h2 id="index-title" class="center">
+        The rating for today is 
+        <span id="rating">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>.
       </h2>
     </article>
+
     <hr>
-    <article>
-      <p>
-        Below is the response data from the Dark Sky API.
-        To calculate the comfort index divide the temperature
-        by ten and add the UV index. Anything under 13 is
-        excellent and anything over is soul crushing.
-      </p>
-      <p>
-        It would definitely be nice to have it be a little
-        more granular than that with maybe 4 possible values.
-      </p>
-      <pre id="dark-sky-response"></pre>
+
+    <article id="links">
+      <div>
+        <p>Heard On</p>
+        <a href="https://www.koop.org/programs/darkest-dawn">Darkest Before Dawn</a>
+      </div>
+      <div>
+        <p>Powered By</p>
+        <a href="https://darksky.net/poweredby/">The Dark Sky API</a>
+      </div>
     </article>
+
   </section>
   
   <script>
   (function () {
-    // var host = 'https://ba9wnfs0b3.execute-api.us-east-1.amazonaws.com/dev';
-    const host = 'http://localhost:3000';
+    var host = 'https://ba9wnfs0b3.execute-api.us-east-1.amazonaws.com/dev';
+    // const host = 'http://localhost:3000';
 
 
     const app = document.getElementById('dark-sky-response');
-    const indexContainer = document.getElementById('index');
+    const ratingContainer = document.getElementById('rating');
 
     getLocation()
       .then(({ latitude, longitude }) => {
         fetch(`${host}/weather?lat=${latitude}&lng=${longitude}`)
           .then(res => res.json())
-          .then(({ currentConditions, index: { rating, score } }) => {
-            indexContainer.innerHTML = rating;
-            app.innerHTML = JSON.stringify({ score, currentConditions }, null, 4);
-          });
-      });
+          .then(({ index: { rating } }) => showRating(rating))
+      })
+      .catch(() => showRating('obscured'));
 
-    // TODO: handle errors here
+    function showRating(rating) {
+      ratingContainer.innerHTML = rating;
+    }
+
     function getLocation() {
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
-          ({ coords }) => resolve(coords)
+          ({ coords }) => resolve(coords),
+          reject
         );
       });
     }
