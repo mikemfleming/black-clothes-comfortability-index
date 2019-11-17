@@ -15,6 +15,7 @@
       background-color: black;
       margin: 0;
       font-family: 'Courier New', Courier, monospace;
+      font-size: 2rem;
     }
 
     header {
@@ -32,7 +33,18 @@
     #message {
       margin: 0 auto;
       width: 80%;
-      padding-top: 2rem;
+      padding-top: 40px;
+    }
+
+    footer {
+      padding-top: 50px;
+      width: 100%;
+    }
+
+    #title {
+      margin: 0 auto;
+      text-align: center;
+      max-width: 800px;
     }
 
     .center {
@@ -45,20 +57,26 @@
       color: red;
     }
 
-    #rating-container {
-      margin-bottom: 6rem;
+    #links {
+      list-style: none;
+      padding-bottom: 20px;
     }
 
-    #links {
-      display: flex;
-      justify-content: space-around;
+    #links li {
+      margin: 0 auto;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    #links p, #links a {
+      font-size: 2rem;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1 class="center">The Black Clothing Comfortability Index</h1>
+    <h1 id="title">The Black Clothing Comfortability Index</h1>
   </header>
 
   <section id="message">
@@ -72,21 +90,20 @@
       </h2>
     </article>
 
-    <hr>
-
-    <article id="links">
-      <div>
-        <p>Heard On</p>
-        <a href="https://www.koop.org/programs/darkest-dawn">Darkest Before Dawn</a>
-      </div>
-      <div>
-        <p>Powered By</p>
-        <a href="https://darksky.net/poweredby/">The Dark Sky API</a>
-      </div>
-    </article>
-
   </section>
-  
+
+  <footer>
+      <ul id="links">
+        <li>
+          <p>Heard On</p>
+          <a href="https://www.koop.org/programs/darkest-dawn">Darkest Before Dawn</a>
+        </li>
+        <li>
+          <p>Powered By</p>
+          <a href="https://darksky.net/poweredby/">The Dark Sky API</a>
+        </li>
+      </ul>
+    </footer>  
   <script>
   (function () {
     var host = 'https://ba9wnfs0b3.execute-api.us-east-1.amazonaws.com/dev';
