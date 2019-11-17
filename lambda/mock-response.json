@@ -1,0 +1,26 @@
+{
+  "currently": {
+    "score": 5.733,
+    "currentConditions": {
+        "time": 1573949350,
+        "summary": "Clear",
+        "icon": "clear-night",
+        "nearestStormDistance": 488,
+        "nearestStormBearing": 87,
+        "precipIntensity": 0,
+        "precipProbability": 0,
+        "temperature": 57.33,
+        "apparentTemperature": 57.33,
+        "dewPoint": 37.89,
+        "humidity": 0.48,
+        "pressure": 1019.9,
+        "windSpeed": 2.74,
+        "windGust": 8.45,
+        "windBearing": 150,
+        "cloudCover": 0,
+        "uvIndex": 0,
+        "visibility": 8.303,
+        "ozone": 271.9
+    }
+  }
+}

@@ -2,7 +2,8 @@
 
 const https = require('https');
 
-const testing = false;
+const mockResponse = require('./mock-response.json')
+const testing = true;
 const { DARK_SKY_API_KEY } = process.env;
 
 async function getWeather({ queryStringParameters: { lat, lng } }) {
@@ -39,30 +40,7 @@ function getTempIndex(t) {
 function request (url) {
   return new Promise((resolve, reject) => {
       if (testing) {
-        resolve({
-          currently: {
-            "testing": true,
-            "time": 1573789150,
-            "summary": "Clear",
-            "icon": "clear-night",
-            "nearestStormDistance": 30,
-            "nearestStormBearing": 323,
-            "precipIntensity": 0,
-            "precipProbability": 0,
-            "temperature": 37.66,
-            "apparentTemperature": 37.82,
-            "dewPoint": 37.05,
-            "humidity": 0.98,
-            "pressure": 1029.7,
-            "windSpeed": 0.51,
-            "windGust": 1.94,
-            "windBearing": 267,
-            "cloudCover": 0.02,
-            "uvIndex": 0,
-            "visibility": 5.371,
-            "ozone": 286.6
-          }
-        });
+        resolve(mockResponse);
       } else {
         let data = '';
 

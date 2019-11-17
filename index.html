@@ -56,10 +56,14 @@
     <hr>
     <article>
       <p>
-          Below is the response data from the Dark Sky API.
-          I'm thinking that the index is a function of the
-          UV index and the temperature but, as you can see,
-          there is a lot of other data we could base it on.
+        Below is the response data from the Dark Sky API.
+        To calculate the comfort index divide the temperature
+        by ten and add the UV index. Anything under 13 is
+        excellent and anything over is soul crushing.
+      </p>
+      <p>
+        It would definitely be nice to have it be a little
+        more granular than that with maybe 4 possible values.
       </p>
       <pre id="dark-sky-response"></pre>
     </article>
@@ -67,20 +71,18 @@
   
   <script>
   (function () {
-    var host = 'https://ba9wnfs0b3.execute-api.us-east-1.amazonaws.com/dev';
-    // const host = 'http://localhost:3000';
+    // var host = 'https://ba9wnfs0b3.execute-api.us-east-1.amazonaws.com/dev';
+    const host = 'http://localhost:3000';
 
 
     const app = document.getElementById('dark-sky-response');
     const indexContainer = document.getElementById('index');
-    const indexTitle = document.getElementById('index-title');
 
     getLocation()
       .then(({ latitude, longitude }) => {
         fetch(`${host}/weather?lat=${latitude}&lng=${longitude}`)
           .then(res => res.json())
           .then(({ currentConditions, index: { rating, score } }) => {
-            indexTitle.classList.remove('loading');
             indexContainer.innerHTML = rating;
             app.innerHTML = JSON.stringify({ score, currentConditions }, null, 4);
           });
